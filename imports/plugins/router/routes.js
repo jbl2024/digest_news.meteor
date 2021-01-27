@@ -1,4 +1,4 @@
-import { isBasicAuth } from "./check-auth.js";
+import { isBasicAuth } from "./check-auth";
 
 import NotFound from "/imports/ui/pages/NotFound/NotFound.vue";
 

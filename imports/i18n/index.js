@@ -11,7 +11,7 @@ Vue.use(VueI18n);
 
 export const i18n = new VueI18n({
   locale: language,
-  fallbackLocale: "fr",
+  fallbackLocale: "en",
   silentTranslationWarn: true,
   messages
 });

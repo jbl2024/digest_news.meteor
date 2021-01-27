@@ -2,7 +2,7 @@
   "name": "digestnews",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "MAIL_URL=smtp://localhost:1025 meteor run --settings settings-development.json --exclude-archs 'web.browser.legacy,web.cordova'",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
@@ -12,7 +12,9 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "bcrypt": "^5.0.0",
+    "handlebars": "^4.7.6",
     "meteor-node-stubs": "^1.0.1",
+    "mjml": "^4.8.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4",
     "vue-i18n": "^8.22.4",

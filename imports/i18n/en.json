@@ -1,0 +1,15 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "login": {
+    "logout": "Logout",
+    "logoutConfirm": "Confirm logout",
+    "activate-email": {
+      "subject": "Please activate your account",
+      "body": "Welcome to my app. Please confirm your account by clicking here: {{url}}",
+      "template": "mjml/en/verify-email.mjml"
+    }
+  }
+}
