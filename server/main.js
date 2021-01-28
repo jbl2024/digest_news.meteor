@@ -8,7 +8,6 @@ import "/imports/api/users/server/users";
 import "/imports/api/users/server/publications";
 import "/imports/api/users/server/email-settings";
 
-
 if (Meteor.settings.email?.mailUrl) {
   process.env.MAIL_URL = Meteor.settings.email.mailUrl;
 }

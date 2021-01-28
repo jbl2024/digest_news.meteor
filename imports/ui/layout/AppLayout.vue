@@ -8,9 +8,9 @@
           <span class="app-subtitle">News</span>
         </v-toolbar-title>
         <v-spacer />
-        <v-avatar dark v-if="currentUser">
+        <v-avatar v-if="currentUser" dark>
           <v-menu offset-y eager>
-            <template v-slot:activator="{ on }">
+            <template #activator="{ on }">
               <v-btn icon v-on="on">
                 <v-icon> mdi-account-circle </v-icon>
               </v-btn>
@@ -21,9 +21,11 @@
                   <v-icon>mdi-exit-to-app</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                  <v-list-item-title>{{
-                    $t("login.logout")
-                  }}</v-list-item-title>
+                  <v-list-item-title>
+                    {{
+                      $t("login.logout")
+                    }}
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -55,7 +57,7 @@ export default {
   data() {
     return {
       showSnackbar: false,
-      timeout: 6000,
+      timeout: 6000
     };
   },
   meteor: {
@@ -63,8 +65,8 @@ export default {
       if (!Meteor.userId()) {
         this.$router.push({ name: "login" }).catch((err) => {
           if (
-            err.name !== "NavigationDuplicated" &&
-            !err.message.includes(
+            err.name !== "NavigationDuplicated"
+            && !err.message.includes(
               "Avoided redundant navigation to current location"
             )
           ) {
@@ -73,10 +75,10 @@ export default {
         });
       }
       return Meteor.user();
-    },
+    }
   },
   computed: {
-    ...mapState(["windowTitle", "notifyMessage"]),
+    ...mapState(["windowTitle", "notifyMessage"])
   },
   watch: {
     notifyMessage(message) {
@@ -91,14 +93,14 @@ export default {
     },
     windowTitle(title) {
       document.title = title;
-    },
+    }
   },
   methods: {
     logout() {
       this.$confirm(this.$t("login.logoutConfirm"), {
         title: this.$t("common.confirm"),
         cancelText: this.$t("common.cancel"),
-        confirmText: this.$t("login.logout"),
+        confirmText: this.$t("login.logout")
       }).then((res) => {
         if (res) {
           Meteor.logout((err) => {
@@ -108,8 +110,7 @@ export default {
           });
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
-

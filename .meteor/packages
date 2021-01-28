@@ -24,3 +24,7 @@ meteortesting:mocha               # A package for writing and running your meteo
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 akryum:vue-sass
 accounts-password
+aldeed:collection2
+mdg:validated-method
+practicalmeteor:sinon
+xolvio:cleaner

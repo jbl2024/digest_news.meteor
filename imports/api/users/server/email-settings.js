@@ -25,7 +25,7 @@ Accounts.emailTemplates.verifyEmail = {
   text(user, url) {
     const locale = Meteor.settings.defaultLocale || "en";
     const i18nHelper = i18n(locale.split("-")[0]);
-    return i18nHelper.t("login.activate-email.body", {url: url});
+    return i18nHelper.t("login.activate-email.body", { url: url });
   },
 
   html(user, url) {

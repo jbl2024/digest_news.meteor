@@ -1,4 +1,5 @@
 import assert from "assert";
+import "./api/bookmarks/bookmarks.tests";
 
 describe("skel", function () {
   it("package.json has correct name", async function () {

@@ -17,7 +17,7 @@ import EmptyState from "/imports/ui/components/widgets/EmptyState.vue";
 export default {
   name: "RegistrationCompleted",
   components: {
-    EmptyState,
+    EmptyState
   },
   i18n: {
     messages: {

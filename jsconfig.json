@@ -1,8 +1,8 @@
-  {
-    "include": [
-      "./client/**/*",
-      "./imports/**/*",
-      "./server/**/*",
-    ]
-  }
-  
+{
+  "include": [
+    "./client/**/*",
+    "./imports/**/*",
+    "./server/**/*",
+    "tests/api/bookmarks/bookmarks.tests.js",
+  ]
+}

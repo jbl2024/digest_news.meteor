@@ -1,6 +1,5 @@
 import { Meteor } from "meteor/meteor";
 
-
 if (Meteor.isServer) {
   Accounts.validateLoginAttempt(function (attemptObj) {
     if (!attemptObj.user) {

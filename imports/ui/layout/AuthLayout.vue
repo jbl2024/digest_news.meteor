@@ -9,7 +9,6 @@
         </v-btn>
       </template>
     </v-snackbar>
-
   </v-app>
 </template>
 
@@ -20,11 +19,11 @@ export default {
   data() {
     return {
       showSnackbar: false,
-      timeout: 6000,
+      timeout: 6000
     };
   },
   computed: {
-    ...mapState(["windowTitle", "notifyMessage"]),
+    ...mapState(["windowTitle", "notifyMessage"])
   },
   watch: {
     notifyMessage(message) {
@@ -39,8 +38,8 @@ export default {
     },
     windowTitle(title) {
       document.title = title;
-    },
-  },  
+    }
+  }
 };
 </script>
 
