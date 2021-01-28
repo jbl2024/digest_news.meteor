@@ -1,12 +1,15 @@
 import Vue from "vue";
 
-import { vuetify } from "../imports/plugins/vuetify";
-import { router } from "../imports/plugins/router";
-import { i18n } from "../imports/i18n";
+import { vuetify } from "/imports/plugins/vuetify";
+import { router } from "/imports/plugins/router";
+import { i18n } from "/imports/i18n";
 import confirm from "/imports/ui/confirm/confirm";
-import "../imports/ui/plugins";
-import { store } from "../imports/store";
-import App from "../imports/ui/App.vue";
+import "/imports/ui/plugins";
+
+import "/imports/api/users/client/email-settings";
+
+import { store } from "/imports/store";
+import App from "/imports/ui/App.vue";
 
 Vue.use(confirm, { vuetify });
 

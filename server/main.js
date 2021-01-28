@@ -6,7 +6,7 @@ import "/imports/api/permissions/permissions";
 
 import "/imports/api/users/server/users";
 import "/imports/api/users/server/publications";
-import "/imports/api/users/server/email-templates";
+import "/imports/api/users/server/email-settings";
 
 
 if (Meteor.settings.email?.mailUrl) {
