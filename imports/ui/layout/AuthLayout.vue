@@ -1,7 +1,7 @@
 <template>
-  <div class="auth-layout">
+  <v-app>
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>

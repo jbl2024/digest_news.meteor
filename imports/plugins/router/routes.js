@@ -2,7 +2,8 @@ import { isBasicAuth } from "./check-auth";
 
 import NotFound from "/imports/ui/pages/NotFound/NotFound.vue";
 
-import Auth from "/imports/ui/layout/Auth.vue";
+import AppLayout from "/imports/ui/layout/AppLayout.vue";
+import AuthLayout from "/imports/ui/layout/AuthLayout.vue";
 import Login from "/imports/ui/pages/Auth/Login.vue";
 import Forbidden from "/imports/ui/pages/Forbidden/Forbidden.vue";
 import RegistrationCompleted from "/imports/ui/pages/Auth/RegistrationCompleted.vue";
@@ -13,20 +14,28 @@ import ResetPassword from "/imports/ui/pages/Auth/ResetPassword.vue";
 import HomePage from "/imports/ui/pages/HomePage.vue";
 
 const routes = [
+
   {
     path: "/",
-    name: "home",
-    component: HomePage,
-    beforeEnter: isBasicAuth
-  },
-  {
-    path: "/forbidden/",
-    name: "forbidden",
-    component: Forbidden
+    name: "app",
+    component: AppLayout,
+    beforeEnter: isBasicAuth,
+    children: [
+      {
+        path: "/",
+        name: "home",
+        component: HomePage,
+      },
+      {
+        path: "/forbidden/",
+        name: "forbidden",
+        component: Forbidden
+      }
+    ]
   },
   {
     path: "/login",
-    component: Auth,
+    component: AuthLayout,
     redirect: { name: "login" },
     children: [
       {
