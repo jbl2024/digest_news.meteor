@@ -1,6 +1,5 @@
 <template>
   <div class="forbidden">
-    youlou
     <empty-state :description="$t('Access forbidden')" illustration="warning">
       <v-btn class="primary" @click="$router.go(-1)">
         {{ $t("Back") }}
