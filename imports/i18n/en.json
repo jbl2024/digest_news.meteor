@@ -4,6 +4,18 @@
     "confirm": "Confirm"
   },
   "login": {
+    "title": "Authentication",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "register": "Register",
+    "lostPassword?": "Lost password?",
+    "errors": {
+      "emailMandatory": "Email is mandatory",
+      "invalidEmail": "Invalid email",
+      "passwordMandatory": "Password is mandatory",
+      "passwordTooShort": "Password is too short"
+    },
     "logout": "Logout",
     "logoutConfirm": "Confirm logout",
     "activate-email": {

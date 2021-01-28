@@ -56,16 +56,6 @@ export default {
       (v) => v.length > 1 || this.$t("Password is too short")
     ]
   }),
-  i18n: {
-    messages: {
-      en: {
-        "Welcome back!": "Welcome back!"
-      },
-      fr: {
-        "Welcome back!": "Ravi de vous revoir!"
-      }
-    }
-  },
   methods: {
     clearForm() {
       this.form.password = null;

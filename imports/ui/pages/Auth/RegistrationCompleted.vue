@@ -12,8 +12,13 @@
 </template>
 
 <script>
+import EmptyState from "/imports/ui/components/widgets/EmptyState.vue";
+
 export default {
   name: "RegistrationCompleted",
+  components: {
+    EmptyState,
+  },
   i18n: {
     messages: {
       en: {

@@ -32,7 +32,6 @@
       </v-app-bar>
       <v-main class="main-content">
         <v-container class="page-container" fluid>
-          {{ $subReady }}
           <router-view />
         </v-container>
       </v-main>

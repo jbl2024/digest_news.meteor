@@ -48,8 +48,10 @@ export const store = new Vuex.Store({
     notifyError(context, error) {
       if (error && error.reason) {
         context.commit("notify", error.reason);
-      } else {
+      } else if (error.error) {
         context.commit("notify", error.error);
+      } else if (error) {
+        context.commit("notify", error);
       }
     }
   }

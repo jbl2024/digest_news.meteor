@@ -114,7 +114,6 @@ export default {
                 this.$notifyError(err.reason);
               } else {
                 this.clearForm();
-                this.$notify(this.$t("Welcome to you!"));
                 this.$router.push({ name: "home" });
               }
             }

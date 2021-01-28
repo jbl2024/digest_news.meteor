@@ -4,13 +4,13 @@
       <v-form v-model="valid" @submit.prevent>
         <v-card>
           <v-card-title class="title">
-            {{ $t('Authentication') }}
+            {{ $t('login.title') }}
           </v-card-title>
           <v-card-text>
             <v-text-field
               id="email"
               v-model="form.email"
-              :label="$t('Email')"
+              :label="$t('login.email')"
               name="email"
               autocomplete="email"
               type="email"
@@ -20,7 +20,7 @@
             <v-text-field
               id="password"
               v-model="form.password"
-              :label="$t('Password')"
+              :label="$t('login.password')"
               type="password"
               name="password"
               autocomplete="password"
@@ -33,17 +33,17 @@
           <v-card-actions>
             <v-spacer />
             <v-btn color="primary" :disabled="sending || !valid" @click="login">
-              {{ $t('Login') }}
+              {{ $t('login.login') }}
             </v-btn>
           </v-card-actions>
           <v-divider />
           <v-card-actions>
             <v-btn small text :to="{ name: 'register' }">
-              {{ $t('Register') }}
+              {{ $t('login.register') }}
             </v-btn>
             <v-spacer />
             <v-btn small text :to="{ name: 'forgot-password' }">
-              {{ $t('Lost password?') }}
+              {{ $t('login.lostPassword?') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -73,12 +73,12 @@ export default {
       },
       sending: false,
       emailRules: [
-        (v) => !!v || this.$t("Email is mandatory"),
-        (v) => v.length > 1 || this.$t("Invalid email")
+        (v) => !!v || this.$t("login.errors.emailMandatory"),
+        (v) => v.length > 1 || this.$t("login.errors.invalidEmail")
       ],
       passwordRules: [
-        (v) => !!v || this.$t("Password is mandatory"),
-        (v) => v.length > 1 || this.$t("Password is too short")
+        (v) => !!v || this.$t("login.errors.passwordMandatory"),
+        (v) => v.length > 1 || this.$t("login.errors.passwordTooShort")
       ]
     };
   },
@@ -93,10 +93,9 @@ export default {
       Meteor.loginWithPassword(this.form.email, this.form.password, (err) => {
         this.sending = false;
         if (err) {
-          this.$notifyError(err.reason);
+          this.$notifyError(err);
         } else {
           this.clearForm();
-          this.$notify(this.$t("Welcome back!"));
           this.$router.push({ name: "home" });
         }
       });
