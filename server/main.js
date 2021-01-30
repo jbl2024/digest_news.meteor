@@ -8,6 +8,9 @@ import "/imports/api/users/server/users";
 import "/imports/api/users/server/publications";
 import "/imports/api/users/server/email-settings";
 
+import "/imports/api/bookmarks/bookmarks";
+import "/imports/api/bookmarks/server/methods";
+
 if (Meteor.settings.email?.mailUrl) {
   process.env.MAIL_URL = Meteor.settings.email.mailUrl;
 }

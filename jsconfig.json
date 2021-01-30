@@ -4,5 +4,8 @@
     "./imports/**/*",
     "./server/**/*",
     "tests/api/bookmarks/bookmarks.tests.js",
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

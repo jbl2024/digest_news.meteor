@@ -38,3 +38,26 @@ Bookmarks.methods.insert = new ValidatedMethod({
     return bookmarkId;
   }
 });
+
+Bookmarks.methods.update = new ValidatedMethod({
+  name: "bookmarks.update",
+  validate: new SimpleSchema({
+    id: { type: String },
+    title: { type: String },
+    url: { type: String }
+  }).validator(),
+  run({ id, title, url }) {
+    checkLoggedIn();
+
+    const now = new Date();
+    const userId = Meteor.userId();
+
+    const bookmark = {
+      title: title,
+      url: url,
+      updatedBy: userId,
+      updatedAt: now
+    };
+    Bookmarks.update({ _id: id }, { $set: bookmark });
+  }
+});

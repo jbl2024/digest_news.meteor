@@ -1,12 +1,16 @@
 <template>
   <div>
-    Hello, world
+    <bookmarks />
   </div>
 </template>
 
 <script>
-export default {
+import Bookmarks from "/imports/ui/components/bookmarks/Bookmarks.vue";
 
+export default {
+  components: {
+    Bookmarks
+  }
 };
 </script>
 

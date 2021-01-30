@@ -1,0 +1,9 @@
+{
+  "email": {
+    "prefix": "[my app]"
+  },
+  "disableAccountCreation": false,
+  "public": {
+    "emailVerificationNeeded": true
+  }
+}
