@@ -1,4 +1,5 @@
 import SimpleSchema from "simpl-schema";
+import { HTTP } from "meteor/jkuester:http";
 
 import { Bookmarks } from "../bookmarks";
 import { checkLoggedIn } from "/imports/api/permissions/permissions";
@@ -13,14 +14,8 @@ Bookmarks.methods.find = new ValidatedMethod({
     checkLoggedIn();
 
     const perPage = 10;
-    let skip = 0;
-    if (page) {
-      skip = (page - 1) * perPage;
-    }
+    const skip = (page - 1) * perPage;
 
-    if (!skip) {
-      skip = 0;
-    }
     const query = {};
 
     if (title && title.length > 0) {
@@ -49,5 +44,24 @@ Bookmarks.methods.find = new ValidatedMethod({
       },
       elements: data
     };
+  }
+});
+
+Bookmarks.methods.find = new ValidatedMethod({
+  name: "bookmarks.crawlTitle",
+  validate: new SimpleSchema({
+    url: { type: String }
+  }).validator(),
+  run({ url }) {
+    checkLoggedIn();
+
+    const data = HTTP.get(url);
+    const content = data?.content || "";
+    const regex = /<title>(.*?)<\/title>/gm;
+    const found = regex.exec(content);
+    if (found && found.length >= 2) {
+      return found[1];
+    }
+    return url;
   }
 });
