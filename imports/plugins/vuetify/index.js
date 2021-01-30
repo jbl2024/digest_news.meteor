@@ -11,10 +11,6 @@ export const vuetify = new Vuetify({
   },
   theme: {
     themes: {
-      light: {
-        primary: "#363636",
-        accent: "#F9A825"
-      }
     }
   }
 });

@@ -1,27 +1,28 @@
 <template>
-  <v-card
-    class="mx-auto bookmark-card pb-2"
-    :color="getColor(bookmark)"
-    max-width="700"
-    :dark="isDark(bookmark)"
-  >
-    <div class="d-flex flex-no-wrap justify-space-between">
+  <v-card class="mx-auto bookmark-card pb-2" max-width="576">
+    <div class="d-flex flex-no-wrap ">
+      <v-avatar v-if="bookmark.metadata" class="ma-3 mt-4" size="48">
+        <v-img :src="getThumbnail(bookmark)" />
+      </v-avatar>
       <div>
-        <v-card-title class="headline" v-text="bookmark.title" />
-        <v-card-subtitle>
+        <v-card-title class="card-title" v-text="bookmark.title" />
+        <v-card-subtitle class="card-subtitle">
           <a
             :href="bookmark.url"
             target="_blank"
-            :class="{ dark: isDark(bookmark) }"
           >{{ bookmark.url }}</a>
         </v-card-subtitle>
-        <v-card-subtitle v-if="bookmark.metadata" v-text="bookmark.metadata.excerpt" />
       </div>
-
-      <v-avatar v-if="bookmark.metadata" class="ma-3" size="125" tile>
-        <v-img :src="getImage(bookmark)" />
-      </v-avatar>
     </div>
+    <v-card-subtitle
+      v-if="bookmark.metadata"
+      class="excerpt"
+      v-text="bookmark.metadata.excerpt"
+    />
+
+    <v-card-text>
+      <v-img class="image" :src="getImage(bookmark)" />
+    </v-card-text>
     <v-card-actions>
       <v-btn outlined rounded small>
         READ
@@ -76,8 +77,21 @@ export default {
     },
 
     getImage(bookmark) {
-      if (bookmark.metadata.image_url && bookmark.metadata.image_url.length > 0) {
-        return bookmark.metadata.image_url;
+      if (!bookmark.metadata) {
+        return null;
+      }
+      if (bookmark.metadata.imageUrl && bookmark.metadata.imageUrl.length > 0) {
+        return bookmark.metadata.imageUrl;
+      }
+      return null;
+    },
+
+    getThumbnail(bookmark) {
+      if (!bookmark.metadata) {
+        return null;
+      }
+      if (bookmark.metadata.thumbnail && bookmark.metadata.thumbnail.length > 0) {
+        return bookmark.metadata.thumbnail;
       }
       return null;
     }
@@ -86,21 +100,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.url-card a {
-  color: rgba(0, 0, 0, 0.6);
-  text-decoration: none;
+.bookmark-card {
+  border-radius: 0.75rem;
+  box-shadow: none !important;
+  border: 1px solid rgb(229, 231, 235);
+
+  a {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+  }
+
+  .card-title {
+    word-break: normal;
+    font-weight: 700;
+    font-size: 0.975rem;
+    line-height: 1.25;
+    padding-left: 4px;
+  }
+  .card-subtitle {
+    padding-left: 4px;
+  }
+
+  a.dark {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .excerpt {
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .image {
+    border-radius: 1rem;
+  }
 }
 
-.url-card .headline {
-  word-break: normal;
-}
-
-.url-card a.dark {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-}
-
-.url-card a:hover {
-  text-decoration: underline;
-}
 </style>

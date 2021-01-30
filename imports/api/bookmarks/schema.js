@@ -19,12 +19,12 @@ export default new SimpleSchema({
     optional: true
   },
 
-  "metadata.color": {
+  "metadata.colors": {
     type: Array,
     optional: true
   },
 
-  "metadata.color.$": {
+  "metadata.colors.$": {
     type: String
   },
 
