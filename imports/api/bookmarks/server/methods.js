@@ -4,6 +4,44 @@ import { HTTP } from "meteor/jkuester:http";
 import { Bookmarks } from "../bookmarks";
 import { checkLoggedIn } from "/imports/api/permissions/permissions";
 
+Bookmarks.methods.insert = new ValidatedMethod({
+  name: "bookmarks.insert",
+  validate: new SimpleSchema({
+    title: { type: String },
+    url: { type: String }
+  }).validator(),
+  run({ title, url }) {
+    checkLoggedIn();
+
+    const now = new Date();
+    const userId = Meteor.userId();
+
+    const existingBookmarksCount = Bookmarks.find({
+      url: url,
+      userId: userId,
+      deleted: { $ne: true }
+    }).count();
+
+    if (existingBookmarksCount > 0) {
+      throw new Meteor.Error("already-exist");
+    }
+
+    const bookmarkId = Bookmarks.insert({
+      userId,
+      title,
+      url,
+      createdAt: now,
+      updatedAt: now,
+      createdBy: userId,
+      updatedBy: userId
+    });
+
+    Meteor.call("bookmarks.crawlMetadata", { id: bookmarkId });
+
+    return bookmarkId;
+  }
+});
+
 Bookmarks.methods.update = new ValidatedMethod({
   name: "bookmarks.update",
   validate: new SimpleSchema({
@@ -17,24 +55,46 @@ Bookmarks.methods.update = new ValidatedMethod({
     const now = new Date();
     const userId = Meteor.userId();
 
-    const existingBookmark = Bookmarks.findOne({ _id: id });
+    const existingBookmark = Bookmarks.findOne({ _id: id, userId: userId });
     if (!existingBookmark) {
       throw new Meteor.Error("not-found");
     }
 
-    const bookmark = {
+    const updateData = {
       title: title,
       url: url,
       updatedBy: userId,
       updatedAt: now
     };
 
-    Bookmarks.update({ _id: id }, { $set: bookmark });
+    Bookmarks.update({ _id: id }, { $set: updateData });
     Meteor.call("bookmarks.crawlMetadata", { id: id });
+  }
+});
 
-    // if (true /* existingBookmark.url !== bookmark.url */) {
-    //   Meteor.call("bookmarks.crawlMetadata", { id: bookmark._id });
-    // }
+Bookmarks.methods.delete = new ValidatedMethod({
+  name: "bookmarks.delete",
+  validate: new SimpleSchema({
+    id: { type: String }
+  }).validator(),
+  run({ id }) {
+    checkLoggedIn();
+
+    const now = new Date();
+    const userId = Meteor.userId();
+
+    const existingBookmark = Bookmarks.findOne({ _id: id, userId: userId });
+    if (!existingBookmark) {
+      throw new Meteor.Error("not-found");
+    }
+
+    const updateData = {
+      deleted: true,
+      updatedBy: userId,
+      updatedAt: now
+    };
+
+    Bookmarks.update({ _id: id }, { $set: updateData });
   }
 });
 
@@ -50,7 +110,9 @@ Bookmarks.methods.find = new ValidatedMethod({
     const perPage = 10;
     const skip = (page - 1) * perPage;
 
-    const query = {};
+    const query = {
+      deleted: { $ne: true }
+    };
 
     if (title && title.length > 0) {
       query.title = {

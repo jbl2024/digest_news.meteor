@@ -17,7 +17,6 @@ Accounts.config({
   sendVerificationEmail: Meteor.settings.public.emailVerificationNeeded
 });
 
-
 Accounts.emailTemplates.from = Meteor.settings.email?.from || "noreply@localhost";
 
 Accounts.emailTemplates.verifyEmail = {

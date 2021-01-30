@@ -26,6 +26,7 @@
             :bookmark="bookmark"
             editable
             @edit="editBookmark(bookmark)"
+            @delete="deleteBookmark(bookmark)"
             @kindle="sendToKindle(bookmark)"
           />
         </v-col>
@@ -77,16 +78,45 @@ export default {
       this.$refs.editBookmark.open();
     },
     sendToKindle(bookmark) {
-      Meteor.call("bookmarks.sendToKindle", {
-        id: bookmark._id
-      }, (error) => {
-        if (error) {
-          this.$notifyError(error);
-          return;
+      Meteor.call(
+        "bookmarks.sendToKindle",
+        {
+          id: bookmark._id
+        },
+        (error) => {
+          if (error) {
+            this.$notifyError(error);
+            return;
+          }
+          this.$notify("Bookmark sent to kindle");
         }
-        this.$notify("Bookmark sent to kindle");
+      );
+    },
+
+    deleteBookmark(bookmark) {
+      this.$confirm(this.$t("bookmarks.deleteBookmark?"), {
+        title: this.$t("common.confirm"),
+        cancelText: this.$t("common.cancel"),
+        confirmText: this.$t("common.delete")
+      }).then((res) => {
+        if (res) {
+          Meteor.call(
+            "bookmarks.delete",
+            {
+              id: bookmark._id
+            },
+            (error) => {
+              if (error) {
+                this.$notifyError(error);
+                return;
+              }
+              this.refresh();
+            }
+          );
+        }
       });
     },
+
     refresh() {
       this.isLoading = true;
       Meteor.call("bookmarks.find", { page: this.page }, (error, result) => {

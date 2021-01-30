@@ -103,6 +103,7 @@ export default {
       };
 
       Meteor.call("bookmarks.insert", bookmark, (error) => {
+        this.isProcessing = false;
         if (error) {
           this.$notifyError(error);
         } else {

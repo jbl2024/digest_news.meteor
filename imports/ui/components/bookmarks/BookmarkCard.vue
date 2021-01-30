@@ -1,8 +1,8 @@
 <template>
   <v-card class="mx-auto bookmark-card pb-2" max-width="576">
     <div class="d-flex flex-no-wrap ">
-      <v-avatar v-if="bookmark.metadata" class="ma-3 mt-4" size="48">
-        <v-img :src="getThumbnail(bookmark)" />
+      <v-avatar class="ma-3 mt-4 avatar" size="48">
+        <v-img v-if="bookmark.metadata" :src="getThumbnail(bookmark)" />
       </v-avatar>
       <div>
         <v-card-title class="card-title" v-text="bookmark.title" />
@@ -30,6 +30,9 @@
       <v-spacer />
       <v-btn v-if="editable" icon @click="$emit('edit')">
         <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+      <v-btn icon @click="$emit('delete')">
+        <v-icon>mdi-delete</v-icon>
       </v-btn>
       <v-btn icon @click="$emit('kindle')">
         <v-icon>mdi-book-open-blank-variant</v-icon>
@@ -138,6 +141,10 @@ export default {
 
   .image {
     border-radius: 1rem;
+  }
+
+  .avatar {
+    border: 1px solid rgb(229, 231, 235);
   }
 }
 
