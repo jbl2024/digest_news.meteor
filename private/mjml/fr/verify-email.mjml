@@ -10,13 +10,13 @@
     <mj-section background-color="#1565c0">
       <mj-column>
         <mj-text align="center" padding="4px" color="#fff" mj-class="big">
-          L'atelier
+          DigestNews
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section background-color="#fff">
       <mj-column>
-        <mj-text>Bienvenue sur l'atelier</mj-text>
+        <mj-text>Welcome to DigestNews</mj-text>
         <mj-button background-color="#f45e43" color="white" href="{{ url }}">
           Confirmer mon inscription
          </mj-button>
