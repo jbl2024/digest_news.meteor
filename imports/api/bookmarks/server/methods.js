@@ -125,7 +125,7 @@ Bookmarks.methods.find = new ValidatedMethod({
     const data = Bookmarks.find(query, {
       skip,
       fields: {
-        "metadata.thumbnail" : 0 
+        "metadata.thumbnail": 0
       },
       limit: perPage,
       sort: {
